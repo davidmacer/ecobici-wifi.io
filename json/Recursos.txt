@@ -1,0 +1,14 @@
+Los datos JSON provienen de alguna de las apis y fuentes de datos libres
+
+Recurso 1: Estaciones Ecobici
+https://datos.cdmx.gob.mx/explore/dataset/estaciones-de-ecobici/export/
+Esto contiene los datos geograficos de las estaciones de ecobici
+
+Se puede usar el formato CSV o Shapefile para explorar la informacion.
+
+
+Recurso 2: Puntos de  acceso WIFI gratuitos
+https://datos.cdmx.gob.mx/explore/dataset/ubicacion-acceso-gratuito-internet-wifi-c5/export/?disjunctive.estatus_conectividad&location=17,19.33062,-99.13571
+
+
+https://datos.cdmx.gob.mx/explore/dataset/ubicacion-acceso-gratuito-internet-wifi-c5/download/?format=json&timezone=America/Mexico_City
