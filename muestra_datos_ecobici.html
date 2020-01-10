@@ -17,15 +17,39 @@
 <body>
     <h2>Datos Ecobici</h2>
     <hr>
+        <input type="button" id="getFirstData" value="Obtener Primeros 30 Datos" /> <input type="button" id="getLastData" value="Obtener Últimos 30 Datos" />
+    <hr>
 
-    <input type="button" id="getFirstData" value="Obtener Primeros 30 Datos" /> <input type="button" id="getLastData" value="Obtener Últimos 30 Datos" />
+    <div id="mapid" style="width: 600px; height: 400px;"></div>
+    <script>
+
+	    var mymap = L.map('mapid').setView([19.4978, -99.1269], 11);
+
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+                '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            id: 'mapbox.streets'
+        }).addTo(mymap);
+
+    </script>
+
     <div id="resultados">
-        <div id="listado">
+    <div id="listado">
+    </div>
+    </div>
 
+    <div id="resultados2">
+        <div id="listado2">
+            
         </div>
     </div>
     <hr>
+
     
+     
+
     <script>
         let debugData;
         $(document).ready(() => {
@@ -57,6 +81,7 @@
                         });
                         //tabla.append('</table>')
                         $('#tabla').DataTable()
+                        L.geoJson(json).addTo(mymap);
                     }
 
                     console.log("jsonData", json);
@@ -68,12 +93,6 @@
         })
     </script>
 
-    <div id="resultados2">
-    <div id="listado2">
-
-    </div>
-    </div>
-    <hr>
 
     <script>
     let debugData2;
@@ -105,6 +124,8 @@
                     });
                     //tabla.append('</table>')
                     $('#tabla').DataTable()
+                    L.geoJson(json).addTo(mymap);
+
                 }
 
                 console.log("jsonData", json);
@@ -114,26 +135,6 @@
 
         }) 
     })
-    </script>
-
-    <div id="mapid" style="width: 600px; height: 400px;"></div>
-    <script>
-
-	    var mymap = L.map('mapid').setView([19.4978, -99.1269], 11);
-
-        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-            maxZoom: 18,
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-                '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-                'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            id: 'mapbox.streets'
-        }).addTo(mymap);
-
-        $.getJSON("json/estaciones-de-ecobici-primeros-30-registros.geojson", function(data){
-        // add GeoJSON layer to the map once the file is loaded
-            L.geoJson(data).addTo(mymap);
-        });
-
     </script>
 
 </body>
