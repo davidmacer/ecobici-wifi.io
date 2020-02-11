@@ -1,0 +1,25 @@
+{
+  "name": "postgis-simple-server",
+  "version": "1.0.0",
+  "description": "Small web server for serving Postgis data as JSON. KOA based.",
+  "main": "simple_server.js",
+  "dependencies": {
+    "http-server": "^0.12.1",
+    "jest": "^24.9.0",
+    "jquery": "^3.4.1",
+    "local-web-server": "^3.0.7",
+    "lws-cors": "^2.0.1",
+    "pg-promise": "^8.7.5",
+    "require": "^2.4.20"
+  },
+  "devDependencies": {
+    "koa-route": "^3.2.0",
+    "lws": "^2.0.3",
+    "lws-body-parser": "^1.0.2"
+  },
+  "scripts": {
+    "test": "npx lws --stack  body-parser lws-static lws-cors simple_server.js  "
+  },
+  "author": "Josafat Guerrero",
+  "license": "ISC"
+}
