@@ -12,10 +12,10 @@ const pgp = require('pg-promise')(initOptions);
 
 const connection = {
     host: 'localhost',
-    port: 5434,
-    database: 'database',
+    port: 5432,
+    database: 'geoinfo',
     user: 'postgres',
-    password: 'password'
+    password: 'postgres'
 };
 
 const db = pgp(connection);
