@@ -12,10 +12,10 @@ const pgp = require('pg-promise')(initOptions);
 
 const connection = {
     host: 'localhost',
-    port: 5434,
-    database: 'database',
+    port: 5432,
+    database: 'geoinfo',
     user: 'postgres',
-    password: 'password'
+    password: 'postgres'
 };
 
 const db = pgp(connection);
@@ -36,14 +36,14 @@ async function getData(ctx) {
     var parametros = ctx.request.query;//el query como un objeto
 
    
-    let query = `select 1 a ,2 b,3 c,4 d,5 e`;//where id = ???
+    let query = `SELECT id, geom, latitud, longitud FROM wifi_c5 LIMIT 5;`;//where id = ???
     let sqlReplacements = {};
 
     console.log(query)
     let resultados = await db.any(query, sqlReplacements);//esperamos los resultados de la consulta con await
     console.log(resultados);
 
-   let jsondata={"results":"12345"}
+   let jsondata = resultados
 
 
     // //iteramos sobre el arreglo de respuestas o results, es decir, para cada resultado_i ejecutamos una pieza de codigo que crea un feature
@@ -85,7 +85,9 @@ async function getResults(ctx) {
     let lon=-100.0;
 
     //ejemplo de consulta falsa a la DB , pero funcional
-    let sqlquery=`SELECT st_asgeojson(st_geomfromtext('POINT(${lon} ${lat})')) json,  1 id, 'Poste' descrip `;//FORM ... WHERE ...
+    let sqlquery = `WITH tablita AS 
+    (SELECT id, geom g, latitud lat, longitud lon FROM wifi_c5) 
+    SELECT st_asgeojson(g) FROM tablita json `;//FORM ... WHERE ...
     let sqlReplacements={};
     let resultados = await db.any(sqlquery, sqlReplacements);//esperamos los resultados de la consulta con await
     //console.log(results);
@@ -111,11 +113,9 @@ async function getResults(ctx) {
         let feature = {
             "type": "Feature",
             "id": resultado_i.id,
-            "geometry": JSON.parse(resultado_i.json),
+            //"geometry": JSON.parse(resultado_i.json),
             "geometry_name": "geom",
             "properties": {
-                "id": resultado_i.id,  //<= muevanle aqui
-                "descripcion": resultado_i.descrip //<= aqui,
 
             }
         };
@@ -147,7 +147,7 @@ class SimplePotreeServer {
 
             //The Server listens for requests on 
 
-            router.get('/getData', getData),//devuelve un listado de nubes
+            router.get('/getC5', getData),//devuelve un listado de nubes
             router.get('/getResults', getResults),//devuelve un listado de nubes
             router.get('/', getInfo)
         ];
