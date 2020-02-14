@@ -76,22 +76,15 @@ async function getInfo(ctx) {
 
 
 
-async function getResults(ctx) {
+async function getWifiBuffer(ctx) {
     
     var parametros = ctx.request.query;//el query como un objeto
-    console.log(parametros.lat);
-    console.log(parametros.lon);
-    let lat=20.0;
-    let lon=-100.0;
-
-    //ejemplo de consulta falsa a la DB , pero funcional
-    let sqlquery = `WITH tablita AS 
-    (SELECT id, geom g, latitud lat, longitud lon FROM wifi_c5) 
-    SELECT st_asgeojson(g) FROM tablita json `;//FORM ... WHERE ...
+    
+    let sqlquery = `SELECT wifi_c5.id id, st_asgeojson(st_buffer(wifi_c5.geom, 0.01)) json, wifi_c5.longitud, wifi_c5.latitud 
+    FROM wifi_c5`;
     let sqlReplacements={};
     let resultados = await db.any(sqlquery, sqlReplacements);//esperamos los resultados de la consulta con await
-    //console.log(results);
-
+    
     //plantilla de objeto geoJSON, la cual debe ser unica para cada peticion
     let geoJSONResult = {
         "type": "FeatureCollection",
@@ -109,26 +102,20 @@ async function getResults(ctx) {
     resultados.forEach(function (resultado_i) {
         //creamos una plantilla para cada feature
         //los properties son especificas de cada fila.
-        //aunque hay manera de automatizar los properties que se agregan, eso queda fuera del alcance de la practica, sorry =(
         let feature = {
             "type": "Feature",
             "id": resultado_i.id,
-            //"geometry": JSON.parse(resultado_i.json),
+            "geometry": JSON.parse(resultado_i.json),
             "geometry_name": "geom",
             "properties": {
-
             }
         };
-        //console.log(JSON.stringify(feature));//por si quisiera ver el contenido de cada iteracion
-        //revisar https://www.w3schools.com/jsref/jsref_push.asp para mas informacion de push()
         geoJSONResult.features.push(feature);//agregamos el feature al arreglo numFeatures
     });
 
-    //un poco de cortesia al programador
     console.log("Registros devueltos: " + geoJSONResult.features.length);
     geoJSONResult.totalFeatures = geoJSONResult.features.length;//actualizando el numero de registros de GeoJSON
     ctx.body= geoJSONResult;//devolviendo los resultados.
-
 
 }//end getREsults
 
@@ -148,7 +135,7 @@ class SimplePotreeServer {
             //The Server listens for requests on 
 
             router.get('/getC5', getData),//devuelve un listado de nubes
-            router.get('/getResults', getResults),//devuelve un listado de nubes
+            router.get('/wifiBuffer', getWifiBuffer),//devuelve un listado de nubes
             router.get('/', getInfo)
         ];
         return endpoints;
