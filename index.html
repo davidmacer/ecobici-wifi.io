@@ -23,10 +23,9 @@
 </head>
 
 <body>
-    <h2>Datos Ecobici</h2>
+    <h2>Datos</h2>
     <hr>
-    <input type="button" id="getFirstData" value="Obtener Primeros 30 Datos" /> <input type="button" id="getLastData"
-        value="Obtener Últimos 30 Datos" />
+    <button id="buffer_wifi">Buffer wifi</button>
     <hr>
 
     <div id="mapid" style="width: 600px; height: 400px;"></div>
@@ -49,10 +48,9 @@
         $(document).ready(() => {
 
             $('#buffer_wifi').click(() => {
-            $('#getFirstData').click(() => {
 
                 $.getJSON(
-                    'json/estaciones-de-ecobici-primeros-30-registros.geojson',
+                    'http://localhost:8000/wifiBuffer',
 
                     function (json) {
                         debugData = json;//usamos esta linea para facilitar las labores de inpeccion de datos, pero no se recomienda dejarlo para produccion
