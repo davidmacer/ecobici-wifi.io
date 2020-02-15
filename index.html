@@ -25,7 +25,15 @@
 <body>
     <h2>Datos</h2>
     <hr>
-    <button id="buffer_wifi">Buffer wifi</button>
+    <button id="consulta_1">Consulta 1</button>
+    <button id="consulta_2">Consulta 2</button>
+    <button id="consulta_3">Consulta 3</button>
+    <button id="consulta_4">Consulta 4</button>
+    <button id="consulta_5">Consulta 5</button>
+    <button id="consulta_6">Consulta 6</button>
+    <button id="consulta_7">Consulta 7</button>
+    <button id="consulta_8">Consulta 8</button>
+    <button id="consulta_9">Consulta 9</button>
     <hr>
 
     <div id="mapid" style="width: 600px; height: 400px;"></div>
@@ -43,14 +51,15 @@
 
     </script>
     
+    <!-- Inicio Consulta 1 -->
     <script>
         let debugData;
         $(document).ready(() => {
 
-            $('#buffer_wifi').click(() => {
+            $('#consulta_1').click(() => {
 
                 $.getJSON(
-                    'http://localhost:8000/wifiBuffer',
+                    'http://localhost:8000/getQ1',
 
                     function (json) {
                         debugData = json;//usamos esta linea para facilitar las labores de inpeccion de datos, pero no se recomienda dejarlo para produccion
@@ -61,7 +70,176 @@
             })
         })
     </script>
+    <!-- Fin Consulta 1 -->
+    
+    <!-- Inicio Consulta 2 -->
+    <script>
+        let debugData;
+        $(document).ready(() => {
 
+            $('#consulta_2').click(() => {
+
+                $.getJSON(
+                    'http://localhost:8000/getQ2',
+
+                    function (json) {
+                        debugData = json;//usamos esta linea para facilitar las labores de inpeccion de datos, pero no se recomienda dejarlo para produccion
+                        if (json) {
+                            L.geoJson(json).addTo(mymap);
+                        }
+                    });
+            })
+        })
+    </script>
+    <!-- Fin Consulta 2 -->
+    
+    <!-- Inicio Consulta 3 -->
+    <script>
+        let debugData;
+        $(document).ready(() => {
+
+            $('#consulta_3').click(() => {
+
+                $.getJSON(
+                    'http://localhost:8000/getQ3',
+
+                    function (json) {
+                        debugData = json;//usamos esta linea para facilitar las labores de inpeccion de datos, pero no se recomienda dejarlo para produccion
+                        if (json) {
+                            L.geoJson(json).addTo(mymap);
+                        }
+                    });
+            })
+        })
+    </script>
+    <!-- Fin Consulta 3 -->
+    
+    <!-- Inicio Consulta 4 -->
+    <script>
+        let debugData;
+        $(document).ready(() => {
+
+            $('#consulta_4').click(() => {
+
+                $.getJSON(
+                    'http://localhost:8000/getQ4',
+
+                    function (json) {
+                        debugData = json;//usamos esta linea para facilitar las labores de inpeccion de datos, pero no se recomienda dejarlo para produccion
+                        if (json) {
+                            L.geoJson(json).addTo(mymap);
+                        }
+                    });
+            })
+        })
+    </script>
+    <!-- Fin Consulta 4 -->
+    
+    <!-- Inicio Consulta 5 -->
+    <script>
+        let debugData;
+        $(document).ready(() => {
+
+            $('#consulta_5').click(() => {
+
+                $.getJSON(
+                    'http://localhost:8000/getQ5',
+
+                    function (json) {
+                        debugData = json;//usamos esta linea para facilitar las labores de inpeccion de datos, pero no se recomienda dejarlo para produccion
+                        if (json) {
+                            L.geoJson(json).addTo(mymap);
+                        }
+                    });
+            })
+        })
+    </script>
+    <!-- Fin Consulta 5 -->
+    
+    <!-- Inicio Consulta 6 -->
+    <script>
+        let debugData;
+        $(document).ready(() => {
+
+            $('#consulta_6').click(() => {
+
+                $.getJSON(
+                    'http://localhost:8000/getQ6',
+
+                    function (json) {
+                        debugData = json;//usamos esta linea para facilitar las labores de inpeccion de datos, pero no se recomienda dejarlo para produccion
+                        if (json) {
+                            L.geoJson(json).addTo(mymap);
+                        }
+                    });
+            })
+        })
+    </script>
+    <!-- Fin Consulta 6 -->
+    
+    <!-- Inicio Consulta 7 -->
+    <script>
+        let debugData;
+        $(document).ready(() => {
+
+            $('#consulta_7').click(() => {
+
+                $.getJSON(
+                    'http://localhost:8000/getQ7',
+
+                    function (json) {
+                        debugData = json;//usamos esta linea para facilitar las labores de inpeccion de datos, pero no se recomienda dejarlo para produccion
+                        if (json) {
+                            L.geoJson(json).addTo(mymap);
+                        }
+                    });
+            })
+        })
+    </script>
+    <!-- Fin Consulta 7 -->
+    
+    <!-- Inicio Consulta 8 -->
+    <script>
+        let debugData;
+        $(document).ready(() => {
+
+            $('#consulta_8').click(() => {
+
+                $.getJSON(
+                    'http://localhost:8000/getQ8',
+
+                    function (json) {
+                        debugData = json;//usamos esta linea para facilitar las labores de inpeccion de datos, pero no se recomienda dejarlo para produccion
+                        if (json) {
+                            L.geoJson(json).addTo(mymap);
+                        }
+                    });
+            })
+        })
+    </script>
+    <!-- Fin Consulta 8 -->
+    
+    <!-- Inicio Consulta 9 -->
+    <script>
+        let debugData;
+        $(document).ready(() => {
+
+            $('#consulta_9').click(() => {
+
+                $.getJSON(
+                    'http://localhost:8000/getQ9',
+
+                    function (json) {
+                        debugData = json;//usamos esta linea para facilitar las labores de inpeccion de datos, pero no se recomienda dejarlo para produccion
+                        if (json) {
+                            L.geoJson(json).addTo(mymap);
+                        }
+                    });
+            })
+        })
+    </script>
+    <!-- Fin Consulta 9 -->
+    
 </body>
 
 </html>
