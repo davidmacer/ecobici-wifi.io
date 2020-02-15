@@ -15,51 +15,6 @@ const connection = {
 
 const db = pgp(connection);
 
-async function getData(ctx) {
-
-    console.log("GET getData()");
-
-    console.log('Request URL: ' + ctx.request.url)//mostrar la ruta completa de la peticion
-    console.log('Query String: ' + ctx.request.querystring)//el querystring pero como una cadena
-    console.log('Body: ' + ctx.request.body);
-
-    var parametros = ctx.request.query;//el query como un objeto
-   
-    let query = `SELECT id, geom, latitud, longitud FROM wifi_c5 LIMIT 5;`;//where id = ???
-    let sqlReplacements = {};
-
-    console.log(query)
-    let resultados = await db.any(query, sqlReplacements);//esperamos los resultados de la consulta con await
-    console.log(resultados);
-
-   let jsondata = resultados
-
-    // //iteramos sobre el arreglo de respuestas o results, es decir, para cada resultado_i ejecutamos una pieza de codigo que crea un feature
-     resultados.forEach(function (resultado_i) {
-   
-       console.log(resultado_i);
-       jsondata.results=resultado_i.b;
-     });
-      console.log(  jsondata  );
-
-    ctx.body = jsondata;//devolviendo los resultados.
-}
-
-//definicion del recurso para obtener X3D
-async function getInfo(ctx) {
-
-    console.log("GET getInfo");
-    console.log(ctx.request.url)//mostrar la ruta completa de la peticion
-    console.log(ctx.request.querystring)//el querystring pero como una cadena
-    console.log(ctx.request.method)//el querystring pero como una cadena
-
-    var parametros = ctx.request.query;//el query como un objeto
-
-    //aqui vamos a utilizar algunos parametros
-
-    ctx.body = 'SIMPLE  SERVER v.0.1 ' + ctx.request.url ;//devolviendo los resultados.
-}
-
 async function getWifiBuffer(ctx) {
     
     var parametros = ctx.request.query;//el query como un objeto
@@ -115,10 +70,8 @@ class SimplePotreeServer {
         const endpoints = [
 
             //The Server listens for requests on 
-
-            router.get('/getC5', getData),//devuelve un listado de nubes
             router.get('/wifiBuffer', getWifiBuffer),//devuelve un listado de nubes
-            router.get('/', getInfo)
+
         ];
         return endpoints;
     }
