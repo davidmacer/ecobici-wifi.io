@@ -2,13 +2,8 @@
 
 console.log('SIMPLE   SERVER  V0.1');
 
-
 const initOptions = {/* initialization options */ };
 const pgp = require('pg-promise')(initOptions);
-
-
-
-
 
 const connection = {
     host: 'localhost',
@@ -20,11 +15,7 @@ const connection = {
 
 const db = pgp(connection);
 
-
-
-
 async function getData(ctx) {
-
 
     console.log("GET getData()");
 
@@ -32,9 +23,7 @@ async function getData(ctx) {
     console.log('Query String: ' + ctx.request.querystring)//el querystring pero como una cadena
     console.log('Body: ' + ctx.request.body);
 
-
     var parametros = ctx.request.query;//el query como un objeto
-
    
     let query = `SELECT id, geom, latitud, longitud FROM wifi_c5 LIMIT 5;`;//where id = ???
     let sqlReplacements = {};
@@ -45,7 +34,6 @@ async function getData(ctx) {
 
    let jsondata = resultados
 
-
     // //iteramos sobre el arreglo de respuestas o results, es decir, para cada resultado_i ejecutamos una pieza de codigo que crea un feature
      resultados.forEach(function (resultado_i) {
    
@@ -55,7 +43,6 @@ async function getData(ctx) {
       console.log(  jsondata  );
 
     ctx.body = jsondata;//devolviendo los resultados.
-
 }
 
 //definicion del recurso para obtener X3D
@@ -72,9 +59,6 @@ async function getInfo(ctx) {
 
     ctx.body = 'SIMPLE  SERVER v.0.1 ' + ctx.request.url ;//devolviendo los resultados.
 }
-
-
-
 
 async function getWifiBuffer(ctx) {
     
@@ -118,8 +102,6 @@ async function getWifiBuffer(ctx) {
     ctx.body= geoJSONResult;//devolviendo los resultados.
 
 }//end getREsults
-
-
 
 class SimplePotreeServer {
 
